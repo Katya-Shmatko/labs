@@ -2,8 +2,6 @@ from pydantic import BaseModel, Field
 import sqlite3
 from datetime import datetime
 
-conn = sqlite3.connect('BlockProcessor.db') 
-cursor = conn.cursor()
 
 class Person(BaseModel):
     id: str = Field(min_length=1)  
@@ -79,9 +77,15 @@ class Block(BaseModel):
 
         return block_list
 
-my_persons = Person.get_from_db(cursor)
-my_sources = Sources.get_from_db(cursor)
-my_votes = Vote.get_from_db(cursor)
-my_blocks = Block.get_from_db(cursor)
+if __name__ == "__main__":
+    conn = sqlite3.connect('BlockProcessor.db') 
+    cursor = conn.cursor()
 
-conn.close()
+    my_persons = Person.get_from_db(cursor)
+    my_sources = Sources.get_from_db(cursor)
+    my_votes = Vote.get_from_db(cursor)
+    my_blocks = Block.get_from_db(cursor)
+    
+    print("Дані успішно завантажено!")
+
+    conn.close()
