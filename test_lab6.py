@@ -29,7 +29,7 @@ def test_block_view():
 
 def test_block_desc():
     with pytest.raises(ValidationError):
-        Block(id = 'ADC143B2', view = 20, desc = '', img = b"test")
+        Block(id = 'ADC143B2', view = 20, desc = '20 views', img = b"test")
 
 
 #class Vote(BaseModel):
